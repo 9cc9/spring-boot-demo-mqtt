@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitor List</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">MonitorApp</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Settings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Profile</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Monitor List</h2>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Last Update</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody id="monitorTableBody">
+    <tr th:each="monitor : ${monitors}">
+      <td th:text="${monitor.id}">1</td>
+      <td th:text="${monitor.name}">Server A</td>
+      <td th:text="${monitor.status}">ONLINE</td>
+      <td th:text="${monitor.gmtModified}">2024-06-13 10:15:30</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-info mb-3" id="addRowBtn">
+    <span class="glyphicon glyphicon-plus"></span> Add
+  </button>
+</div>
+
+<footer class="bg-dark text-white text-center py-3">
+  <p>&copy; 2024 MonitorApp. All rights reserved.</p>
+</footer>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#addRowBtn').click(function () {
+      var newRow = '<tr>' +
+        '<td></td>' +
+        '<td><input type="text" class="form-control" name="name" required></td>' +
+        '<td>' +
+        '<select class="form-control" name="status" required>' +
+        '<option value="ONLINE">ONLINE</option>' +
+        '<option value="OFFLINE">OFFLINE</option>' +
+        '</select>' +
+        '</td>' +
+        '<td></td>' +
+        '<td><button type="button" class="btn btn-success mb-3 submitMonitorBtn"><i class="bi bi-check-lg">OK</i></button></td>' +
+        '</tr>';
+      $('#monitorTableBody').prepend(newRow);
+    });
+
+    $('#monitorTableBody').on('click', '.submitMonitorBtn', function () {
+      var newRow = $(this).closest('tr');
+      var newMonitorName = newRow.find('input[name="name"]').val();
+      var newMonitorStatus = newRow.find('select[name="status"]').val();
+
+      if (!newMonitorName || !newMonitorStatus) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      $.ajax({
+        type: 'POST',
+        url: '/monitor/add.json',
+        contentType: 'application/json',
+        data: JSON.stringify({name: newMonitorName, status: newMonitorStatus}),
+        success: function (response) {
+          if (response.success) {
+            var newMonitor = response.data;
+            newRow.find('td:first').text(newMonitor.id);
+            newRow.find('td:nth-child(2)').text(newMonitor.name);
+            newRow.find('td:nth-child(3)').text(newMonitor.status);
+            newRow.find('td:nth-child(4)').text(newMonitor.gmtModified);
+            newRow.find('td:nth-child(5)').html('');  // 清除操作按钮
+
+            // 移动新行到表格最后
+            $('#monitorTableBody').append(newRow);
+          } else {
+            alert('Failed to add monitor: ' + response.message);
+          }
+        },
+        error: function (error) {
+          alert('Error adding monitor: ' + error.responseText);
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

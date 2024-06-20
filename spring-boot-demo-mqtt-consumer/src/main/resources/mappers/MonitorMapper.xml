@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MonitorMapper">
+
+    <insert id="insert" parameterType="com.example.entity.MonitorEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `demo_monitor` (`name`, `status`,`gmt_create`, `gmt_modified`)
+        VALUES (#{name},
+                #{status},
+                #{gmtCreate},
+                #{gmtModified})
+    </insert>
+
+    <delete id="deleteById">
+        DELETE
+        FROM `demo_monitor`
+        WHERE `id` = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,21 @@
+<!-- velocity引擎 -->
+<bean id="velocityConfig"
+        class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+    <!-- 模板存放的路径 -->
+    <property name="resourceLoaderPath" value="/templates/vm"/>
+    <property name="configLocation" value="classpath:templates/velocity.properties"/>
+</bean>
+
+<!-- velocity解析器 -->
+<bean id="viewResolver"
+        class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+    <property name="cache" value="false"/>
+    <property name="layoutUrl" value="/templates/vm/layout/default.vm"/>
+    <!-- 视图文件的前缀，即存放的路径 -->
+    <property name="prefix" value=""/>
+    <!-- 视图文件的后缀名 -->
+    <property name="suffix" value=".vm"/>
+    <!--是否使用spring对宏定义的支持-->
+    <property name="exposeSpringMacroHelpers" value="true"/>
+    <property name="contentType" value="text/html;charset=UTF-8"/>
+</bean>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VM页面</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>欢迎使用VM页面</h1>
+    <p>这是一个简单的VM页面，可以在iOS应用中展示。</p>
+    <button onclick="sendMessageToApp()">发送消息到App</button>
+
+</body>
+</html>
