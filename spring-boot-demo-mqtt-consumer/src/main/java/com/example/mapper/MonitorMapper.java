@@ -44,6 +44,11 @@ public interface MonitorMapper {
     int insert( MonitorEntity monitor);
 
     /**
+     * @param entity
+     */
+    void updateById(MonitorEntity entity);
+
+    /**
      * 删除监控
      *
      * @param id 主键id

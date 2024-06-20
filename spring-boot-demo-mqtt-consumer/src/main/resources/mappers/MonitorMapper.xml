@@ -15,4 +15,12 @@
         FROM `demo_monitor`
         WHERE `id` = #{id}
     </delete>
+
+    <update id="updateById" parameterType="com.example.entity.MonitorEntity">
+        UPDATE `demo_monitor`
+        SET `name` = #{name},
+            `status` = #{status},
+            `gmt_modified` = #{gmtModified}
+        WHERE `id` = #{id}
+    </update>
 </mapper>

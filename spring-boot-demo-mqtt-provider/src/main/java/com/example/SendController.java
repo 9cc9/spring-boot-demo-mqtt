@@ -2,7 +2,7 @@ package com.example;
 
 import com.alibaba.fastjson2.JSON;
 import com.example.config.MqttProviderConfig;
-import com.example.model.MonitorEntity;
+import com.example.entity.MonitorEntity;
 import com.example.model.MqttAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -10,6 +10,7 @@
   <modules>
     <module>spring-boot-demo-mqtt-provider</module>
     <module>spring-boot-demo-mqtt-consumer</module>
+    <module>spring-boot-demo-mqtt-base</module>
   </modules>
   <packaging>pom</packaging>
 
