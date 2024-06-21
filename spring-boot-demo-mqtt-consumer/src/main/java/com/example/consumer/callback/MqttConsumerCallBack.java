@@ -1,10 +1,13 @@
-package com.example.consumer.controller.mqtt;
+package com.example.consumer.callback;
 
 
 import com.alibaba.fastjson2.JSON;
+import com.example.base.log.LogUtil;
 import com.example.base.model.MqttAction;
 import com.example.consumer.service.MonitorService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -17,6 +20,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MqttConsumerCallBack implements MqttCallback {
 
+    /**
+     * logger
+     */
+    private static final Logger logger = LogManager.getLogger(MqttConsumerCallBack.class);
+
     @Autowired
     private MonitorService monitorService;
 
@@ -25,7 +33,7 @@ public class MqttConsumerCallBack implements MqttCallback {
      */
     @Override
     public void connectionLost(Throwable throwable) {
-        System.out.println("与服务器断开连接，可重连");
+        LogUtil.warn(logger, "client connect lost.");
     }
 
     /**
@@ -33,11 +41,9 @@ public class MqttConsumerCallBack implements MqttCallback {
      */
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
-        System.out.println(String.format("接收消息主题 : %s", topic));
-        System.out.println(String.format("接收消息Qos : %d", message.getQos()));
+
+        LogUtil.info(logger, "[接收消息]:", JSON.toJSONString(message));
         String payload = new String(message.getPayload());
-        System.out.println(String.format("接收消息内容 : %s", payload));
-        System.out.println(String.format("接收消息retained : %b", message.isRetained()));
 
         if (StringUtils.isNotBlank(payload)) {
             MqttAction action = JSON.parseObject(payload, MqttAction.class);
@@ -51,8 +57,7 @@ public class MqttConsumerCallBack implements MqttCallback {
                     case ("DELETE"):
                         monitorService.delete(action.getMonitor().getId());
                     default:
-
-
+                        LogUtil.warn(logger, "Action not match,action=", action);
                 }
             }
         }
@@ -63,6 +68,6 @@ public class MqttConsumerCallBack implements MqttCallback {
      */
     @Override
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-        System.out.println(String.format("接收消息成功"));
+        LogUtil.info(logger, "client delivery success.");
     }
 }
