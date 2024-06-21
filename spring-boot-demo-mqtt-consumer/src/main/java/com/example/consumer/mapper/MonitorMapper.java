@@ -1,4 +1,4 @@
-package com.example.provider.mapper;
+package com.example.consumer.mapper;
 
 import com.example.base.entity.MonitorEntity;
 import org.apache.ibatis.annotations.*;

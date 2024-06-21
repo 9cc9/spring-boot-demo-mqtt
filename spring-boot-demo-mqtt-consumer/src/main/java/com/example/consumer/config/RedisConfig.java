@@ -1,4 +1,4 @@
-package com.example.provider.config;
+package com.example.consumer.config;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;

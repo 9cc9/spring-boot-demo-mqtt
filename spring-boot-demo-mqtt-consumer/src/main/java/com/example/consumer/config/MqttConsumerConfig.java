@@ -1,7 +1,7 @@
-package com.example.provider.config;
+package com.example.consumer.config;
 
 
-import com.example.provider.controller.mqtt.MqttConsumerCallBack;
+import com.example.consumer.controller.mqtt.MqttConsumerCallBack;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;

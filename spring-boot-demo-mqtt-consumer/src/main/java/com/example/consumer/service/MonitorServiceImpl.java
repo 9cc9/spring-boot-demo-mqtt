@@ -1,7 +1,7 @@
-package com.example.provider.service;
+package com.example.consumer.service;
 
 import com.example.base.entity.MonitorEntity;
-import com.example.provider.mapper.MonitorMapper;
+import com.example.consumer.mapper.MonitorMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;

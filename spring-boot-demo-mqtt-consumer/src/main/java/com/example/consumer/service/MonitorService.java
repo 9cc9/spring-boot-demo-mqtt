@@ -1,4 +1,4 @@
-package com.example.provider.service;
+package com.example.consumer.service;
 
 
 import com.example.base.entity.MonitorEntity;

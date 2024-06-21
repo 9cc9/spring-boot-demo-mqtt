@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Properties>
+        <Property name="LOG_PATH">logs</Property>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Property>
+    </Properties>
+
+    <!-- Console Appender -->
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- Provider日志文件配置 -->
+        <RollingFile name="SPRING_BOOT_DEMO_MQTT_PROVIDER" fileName="${LOG_PATH}/demo-provider.log"
+                     filePattern="${LOG_PATH}/demo-provider-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+        <!-- Consumer日志文件配置 -->
+        <RollingFile name="SPRING_BOOT_DEMO_MQTT_CONSUMER" fileName="${LOG_PATH}/demo-consumer.log"
+                     filePattern="${LOG_PATH}/demo-consumer-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+        <!-- ERROR 级别日志文件配置 -->
+        <RollingFile name="ERROR_FILE" fileName="${LOG_PATH}/demo-error.log"
+                     filePattern="${LOG_PATH}/demo-error-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+            <Filters>
+                <ThresholdFilter level="error"/>
+            </Filters>
+        </RollingFile>
+
+        <!-- COMMON 级别日志文件配置 -->
+        <RollingFile name="COMMON_FILE" fileName="${LOG_PATH}/demo-common.log"
+                     filePattern="${LOG_PATH}/demo-common-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+            <DefaultRolloverStrategy max="7"/>
+            <Filters>
+                <ThresholdFilter level="debug"/>
+            </Filters>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Logger 配置 -->
+        <Logger name="com.example.provider" level="debug" additivity="false">
+            <AppenderRef ref="SPRING_BOOT_DEMO_MQTT_PROVIDER"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="com.example.consumer" level="debug" additivity="false">
+            <AppenderRef ref="SPRING_BOOT_DEMO_MQTT_CONSUMER"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <!-- Root Logger 配置 -->
+        <Root level="debug">
+            <AppenderRef ref="COMMON_FILE"/>
+            <AppenderRef ref="ERROR_FILE"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

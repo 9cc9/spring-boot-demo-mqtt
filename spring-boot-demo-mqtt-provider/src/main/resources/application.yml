@@ -7,6 +7,7 @@ logging:
     org.springframework.web: DEBUG
     org.springframework.web.servlet.view: DEBUG
     org.springframework.web.servlet.view.velocity: DEBUG
+  config: classpath:log4j2-spring.xml
 spring:
   application:
     name: provider

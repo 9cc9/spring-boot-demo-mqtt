@@ -1,9 +1,9 @@
-package com.example.provider.controller.mqtt;
+package com.example.consumer.controller.mqtt;
 
 
 import com.alibaba.fastjson2.JSON;
 import com.example.base.model.MqttAction;
-import com.example.provider.service.MonitorService;
+import com.example.consumer.service.MonitorService;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;

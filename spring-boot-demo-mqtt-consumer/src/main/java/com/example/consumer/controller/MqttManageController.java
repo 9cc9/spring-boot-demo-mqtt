@@ -1,6 +1,6 @@
-package com.example.provider.controller;
+package com.example.consumer.controller;
 
-import com.example.provider.config.MqttConsumerConfig;
+import com.example.consumer.config.MqttConsumerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
