@@ -2,10 +2,10 @@ package com.example.consumer.callback;
 
 
 import com.alibaba.fastjson2.JSON;
+import com.example.base.exception.AssertUtil;
 import com.example.base.log.LogUtil;
 import com.example.base.model.MqttAction;
 import com.example.consumer.service.MonitorService;
-import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -45,21 +45,21 @@ public class MqttConsumerCallBack implements MqttCallback {
         LogUtil.info(logger, "[接收消息]:", JSON.toJSONString(message));
         String payload = new String(message.getPayload());
 
-        if (StringUtils.isNotBlank(payload)) {
-            MqttAction action = JSON.parseObject(payload, MqttAction.class);
-            if (action != null && StringUtils.isNotBlank(action.getAction())) {
-                switch (action.getAction()) {
-                    case ("ADD"):
-                    case ("UPDATE"):
-                        monitorService.addOrUpdate(action.getMonitor());
-                        break;
+        AssertUtil.isNotBlank(payload);
+        MqttAction action = JSON.parseObject(payload, MqttAction.class);
+        AssertUtil.notNull(action);
+        AssertUtil.isNotBlank(action.getAction());
 
-                    case ("DELETE"):
-                        monitorService.delete(action.getMonitor().getId());
-                    default:
-                        LogUtil.warn(logger, "Action not match,action=", action);
-                }
-            }
+        switch (action.getAction()) {
+            case ("ADD"):
+            case ("UPDATE"):
+                monitorService.addOrUpdate(action.getMonitor());
+                break;
+
+            case ("DELETE"):
+                monitorService.delete(action.getMonitor().getId());
+            default:
+                LogUtil.warn(logger, "Action not match,action=", action);
         }
     }
 

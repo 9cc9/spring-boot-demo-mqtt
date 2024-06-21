@@ -31,7 +31,7 @@ public class SendController {
             mqttAction.setAction(action);
             mqttAction.setMonitor(monitor);
 
-            providerClient.publish(qos, retained, topic, JSON.toJSONString(action));
+            providerClient.publish(qos, retained, topic, JSON.toJSONString(mqttAction));
             return "发送成功";
         } catch (Exception e) {
             LogUtil.warn(logger, e, "send message failed,monitorName=", monitorName);
