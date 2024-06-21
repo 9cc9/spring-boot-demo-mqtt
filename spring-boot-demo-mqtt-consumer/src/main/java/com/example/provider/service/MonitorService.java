@@ -1,7 +1,7 @@
-package com.example.service;
+package com.example.provider.service;
 
 
-import com.example.entity.MonitorEntity;
+import com.example.base.entity.MonitorEntity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.mqtt;
+package com.example.provider.mqtt;
 
 import org.eclipse.paho.client.mqttv3.IMqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;

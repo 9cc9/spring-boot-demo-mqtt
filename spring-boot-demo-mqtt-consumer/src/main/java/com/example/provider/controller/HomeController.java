@@ -1,7 +1,7 @@
-package com.example.controller;
+package com.example.provider.controller;
 
-import com.example.entity.MonitorEntity;
-import com.example.service.MonitorService;
+import com.example.base.entity.MonitorEntity;
+import com.example.provider.service.MonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

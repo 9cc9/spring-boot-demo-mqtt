@@ -1,8 +1,8 @@
-package com.example.controller;
+package com.example.provider.controller;
 
-import com.example.entity.MonitorEntity;
-import com.example.service.MonitorService;
-import com.example.util.BaseResult;
+import com.example.base.entity.MonitorEntity;
+import com.example.provider.service.MonitorService;
+import com.example.base.util.BaseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

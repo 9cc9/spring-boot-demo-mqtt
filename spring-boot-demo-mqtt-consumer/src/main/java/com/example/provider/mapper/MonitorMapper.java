@@ -1,6 +1,6 @@
-package com.example.mapper;
+package com.example.provider.mapper;
 
-import com.example.entity.MonitorEntity;
+import com.example.base.entity.MonitorEntity;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 

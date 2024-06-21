@@ -92,6 +92,12 @@
       <artifactId>fastjson2</artifactId>
     </dependency>
 
+    <!-- Spring Boot Starter Logging (包含 SLF4J 和 Logback) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-logging</artifactId>
+    </dependency>
+
 
   </dependencies>
 

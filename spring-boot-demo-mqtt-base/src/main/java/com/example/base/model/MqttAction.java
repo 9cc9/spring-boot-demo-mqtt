@@ -1,6 +1,6 @@
-package com.example.model;
+package com.example.base.model;
 
-import com.example.entity.MonitorEntity;
+import com.example.base.entity.MonitorEntity;
 import lombok.Data;
 import org.apache.commons.lang.builder.ToStringBuilder;
 

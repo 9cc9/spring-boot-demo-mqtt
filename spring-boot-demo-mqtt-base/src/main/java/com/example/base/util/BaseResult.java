@@ -1,4 +1,4 @@
-package com.example.util;
+package com.example.base.util;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 

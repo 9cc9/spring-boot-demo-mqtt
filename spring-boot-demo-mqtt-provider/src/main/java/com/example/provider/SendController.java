@@ -1,9 +1,9 @@
-package com.example;
+package com.example.provider;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.config.MqttProviderConfig;
-import com.example.entity.MonitorEntity;
-import com.example.model.MqttAction;
+import com.example.provider.config.MqttProviderConfig;
+import com.example.base.entity.MonitorEntity;
+import com.example.base.model.MqttAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

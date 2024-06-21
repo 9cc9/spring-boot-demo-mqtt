@@ -82,6 +82,13 @@
         <artifactId>fastjson2</artifactId>
         <version>2.0.51</version>
       </dependency>
+
+      <!-- Spring Boot Starter Logging (包含 SLF4J 和 Logback) -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-logging</artifactId>
+        <version>2.1.0.RELEASE</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -98,7 +105,11 @@
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.7.0</version>
+          <version>3.8.1</version> <!-- 使用较新的版本 -->
+          <configuration>
+            <source>8</source> <!-- 确保这里的版本与你的JDK版本一致 -->
+            <target>8</target>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>

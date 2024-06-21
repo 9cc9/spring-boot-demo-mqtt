@@ -46,9 +46,10 @@ spring:
     # 一般来说是不用配置的，Spring Cache 会根据依赖的包自行装配
     type: redis
   datasource:
+#    url: jdbc:mysql://10.0.0.25:3306/spring_boot_demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
     url: jdbc:mysql://127.0.0.1:3306/spring_boot_demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
     username: root
-    password:
+    password: Gmy900925
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     initialization-mode: always
@@ -71,4 +72,4 @@ mybatis:
     # 下划线转驼峰
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mappers/*.xml
-  type-aliases-package: com.example.entity
+  type-aliases-package: com.example.base.entity
