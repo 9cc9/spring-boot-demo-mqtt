@@ -1,6 +1,7 @@
 package com.example.consumer.controller;
 
 import com.example.base.entity.MonitorEntity;
+import com.example.base.exception.AssertUtil;
 import com.example.consumer.service.MonitorService;
 import com.example.base.util.BaseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,24 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/monitor")
-public class MonitorController {
+public class MonitorController extends AbstractController {
 
-  @Autowired
-  private MonitorService monitorService;
+    @Autowired
+    private MonitorService monitorService;
 
-  @PostMapping("/add.json")
-  public BaseResult<MonitorEntity> addMonitor(@RequestBody MonitorEntity monitor) {
-    monitorService.addOrUpdate(monitor);
+    @PostMapping("/add.json")
+    public BaseResult<MonitorEntity> addMonitor(@RequestBody MonitorEntity monitor) {
 
-    return BaseResult.success(monitor);
-  }
+        check(monitor);
+
+        monitorService.addOrUpdate(monitor);
+
+        return BaseResult.success(monitor);
+    }
+
+    private void check(MonitorEntity monitor) {
+        AssertUtil.notNull(monitor);
+        AssertUtil.isNotBlank(monitor.getName());
+        AssertUtil.isNotBlank(monitor.getStatus());
+    }
 }
